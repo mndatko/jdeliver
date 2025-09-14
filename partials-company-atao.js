@@ -53,7 +53,7 @@ async function checkCompany(signUpHint) {
 
                     showLoader();
                     nextButton.disabled = true;
-                    
+
                     var companyCheckStatus = "PENDING";
                     while(companyCheckStatus === "PENDING"){
                         const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/prospect/step/COMPANY_DETAILS', {
@@ -144,7 +144,7 @@ async function checkCompany(signUpHint) {
                                                     }
                                                 }
                                                 else {
-                                                    await sleep(5000);
+                                                    await sleep(1000);
                                                 }
                                             } else {
                                                 const errorCreditCheck = await responseCreditCheck.json();
@@ -161,7 +161,7 @@ async function checkCompany(signUpHint) {
                                 }
                             }
                             else {
-                                await sleep(5000);
+                                await sleep(1000);
                             }
                         } else {
                             const error = await response.json();
@@ -175,7 +175,7 @@ async function checkCompany(signUpHint) {
                 }
                 finally {
                     hideLoader();
-                    submitButton.disabled = false;
+                    nextButton.disabled = false;
                 }              
             }
 
