@@ -1,4 +1,4 @@
-function handleCompanyATAO(signUpHint) {
+function checkCompany(signUpHint) {
 
     if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
