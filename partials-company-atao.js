@@ -1,4 +1,5 @@
 function handleCompanyATAO(signUpHint) {
+
     if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
         const step1 = document.getElementById('step1-atao');
@@ -83,6 +84,68 @@ function handleCompanyATAO(signUpHint) {
                 }               
             }
 
+        });
+    }
+    else {
+
+        const nextButton = document.getElementById('nextButton');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const errorP = document.getElementById('step1-error');
+
+        const company = document.getElementById('company');
+        const companyName = document.getElementById('company_name');
+        const companyStreet = document.getElementById('company_street');
+        const companyPostalCode = document.getElementById('company_postalcode');
+        const companyCountry = document.getElementById('company_country');
+
+        nextButton.addEventListener('click', async () => {
+            const accountNumber = document.getElementById('accountNumber').value;
+            const accountPostalCode = document.getElementById('accountPostalCode').value;
+
+            if (accountNumber && accountPostalCode)
+            {
+                try {
+                    const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/account/validate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'x-banner': 'frx' },
+                        body: JSON.stringify({ accountNumberForExistingAccount: accountNumber, postalCodeForExistingAccount: accountPostalCode, "accountNumberForExistingAccountBot":null, "postalCodeForExistingAccountBot":null })
+                    });
+
+                    if (response.ok) {
+                        
+                        const companyJson = await response.json();
+                        
+                        companyName.textContent = companyJson.companyName;
+                        companyStreet.textContent = companyJson.billingAddress.address1;
+                        companyPostalCode.textContent = companyJson.billingAddress.postalCode + " " + companyJson.billingAddress.city;
+                        companyCountry.textContent = getCountryName(companyJson.billingAddress.country);
+                        company.style.display = 'block';
+
+                        step1.style.display = 'none';
+                        step2.style.display = 'block';
+                        
+                        const form = document.querySelector('form[data-form-primary="true"]');
+                        if (!form) {
+                            console.error(`Form not found.`);
+                            return;
+                        }
+
+                        for (const child of form.children) {
+                            if (child.tagName === 'DIV' && !child.id.startsWith('ulp-container-form-content-start')) {
+                                child.style.display = '';
+                            }
+                        }
+                    } else {
+                        const error = await response.json();
+                        errorP.textContent = error.message || 'Validation failed.';
+                        errorP.style.display = 'block';
+                    }
+                } catch (err) {
+                    errorP.textContent = 'An unexpected error occurred.';
+                    errorP.style.display = 'block';
+                }
+            }
         });
     }
 }
