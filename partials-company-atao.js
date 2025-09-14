@@ -2,15 +2,13 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//async function checkCompany(signUpHint) {
-function checkCompany(signUpHint) {
+async function checkCompany(signUpHint) {
 
-    /*if(signUpHint === "ATAO") {
+    if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
         const step1 = document.getElementById('step1-atao');
         const step2 = document.getElementById('step2');
         const errorP = document.getElementById('step1-error-atao');
-        var siret = document.getElementById('siretNumber');
         var companyCheckUUUID = null;
 
         const loaderOverlay = document.getElementById('loaderOverlay');
@@ -48,7 +46,7 @@ function checkCompany(signUpHint) {
                 }               
             }
 
-            const siretNumber = siret.value;
+            const siretNumber = document.getElementById('siretNumber').value;
             if (siretNumber && regEmailAddress)
             {
                 try {
@@ -130,8 +128,8 @@ function checkCompany(signUpHint) {
                                                         errorP.style.display = 'block';
                                                     } 
 
-                                                    step1.style.display = 'none';
-                                                    step2.style.display = 'block';
+                                                    step1.classList.add('visually-hidden');
+                                                    step2.classList.remove('visually-hidden'); 
                                                     
                                                     const form = document.querySelector('form[data-form-primary="true"]');
                                                     if (!form) {
@@ -182,11 +180,11 @@ function checkCompany(signUpHint) {
             }
 
         });
-    }*/
-    //else {
-    if(true) {
+    }
+    else {
+
         const nextButton = document.getElementById('nextButton');
-        const step1 = document.getElementById('step1');
+        const step1 = document.getElementById('step1-etao');
         const step2 = document.getElementById('step2');
         const errorP = document.getElementById('step1-error');
 
@@ -203,11 +201,26 @@ function checkCompany(signUpHint) {
             if (accountNumber && accountPostalCode)
             {
                 try {
-                    const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/account/validate', {
+                    /*const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/account/validate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-banner': 'frx' },
                         body: JSON.stringify({ accountNumberForExistingAccount: accountNumber, postalCodeForExistingAccount: accountPostalCode, "accountNumberForExistingAccountBot":null, "postalCodeForExistingAccountBot":null })
-                    });
+                    });*/
+
+                    const sampleCompanyJson = {
+                        "companyName": "Bâtiment SAS",
+                        "billingAddress": {
+                            "address1": "123 Rue de la République",
+                            "postalCode": "75001",
+                            "city": "PARIS",
+                            "country": "FR"
+                        }
+                    };
+
+                    const response = {
+                        ok: true, 
+                        json: async () => sampleCompanyJson
+                    };
 
                     if (response.ok) {
                         
@@ -219,8 +232,8 @@ function checkCompany(signUpHint) {
                         companyCountry.textContent = getCountryName(companyJson.billingAddress.country);
                         company.style.display = 'block';
 
-                        step1.style.display = 'none';
-                        step2.style.display = 'block';
+                        step1.classList.add('visually-hidden');
+                        step2.classList.remove('visually-hidden'); 
                         
                         const form = document.querySelector('form[data-form-primary="true"]');
                         if (!form) {
@@ -242,6 +255,7 @@ function checkCompany(signUpHint) {
                     errorP.textContent = 'An unexpected error occurred.';
                     errorP.style.display = 'block';
                 }
+
             }
         });
     }
