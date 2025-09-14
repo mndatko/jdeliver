@@ -11,9 +11,18 @@ async function checkCompany(signUpHint) {
         const errorP = document.getElementById('step1-error-atao');
         var companyCheckUUUID = null;
 
+        const loaderOverlay = document.getElementById('loaderOverlay');
+        function showLoader() {
+            loaderOverlay.classList.add('active');
+        }
+        function hideLoader() {
+            loaderOverlay.classList.remove('active');
+        }
+
         nextButton.addEventListener('click', async () => {
             const regEmailAddress = sessionStorage.getItem('registeringEmailAddress');
             const regUsername = sessionStorage.getItem('registeringUsername');
+
             if (regEmailAddress && regUsername)
             {
                 try {
@@ -41,6 +50,10 @@ async function checkCompany(signUpHint) {
             if (siretNumber && regEmailAddress)
             {
                 try {
+
+                    showLoader();
+                    nextButton.disabled = true;
+                    
                     var companyCheckStatus = "PENDING";
                     while(companyCheckStatus === "PENDING"){
                         const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/prospect/step/COMPANY_DETAILS', {
@@ -159,7 +172,11 @@ async function checkCompany(signUpHint) {
                 } catch (err) {
                     errorP.textContent = 'An unexpected error occurred.';
                     errorP.style.display = 'block';
-                }               
+                }
+                finally {
+                    hideLoader();
+                    submitButton.disabled = false;
+                }              
             }
 
         });
