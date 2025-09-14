@@ -2,7 +2,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function handleCompanyATAO(signUpHint) {
+async function checkCompany(signUpHint) {
 
     if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
