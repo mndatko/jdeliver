@@ -1,4 +1,4 @@
-
+function handleCompanyATAO(signUpHint) {
     if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
         const step1 = document.getElementById('step1-atao');
@@ -85,3 +85,4 @@
 
         });
     }
+}
