@@ -52,7 +52,7 @@ async function checkCompany(signUpHint) {
                             const companyCheckJson = await response.json();
                             console.log("companyCheckJson: ", companyCheckJson);
                             companyCheckUUUID = companyCheckJson.id;
-                            companyCheckStatus = companyCreditCheckJson.registrationStatus || "PENDING";
+                            companyCheckStatus = companyCheckJson.registrationStatus || "PENDING";
 
                             if(companyCheckStatus === "IN_PROGRESS") {
                                 if(companyCheckJson.companyExists === true){
@@ -92,7 +92,7 @@ async function checkCompany(signUpHint) {
                                                 const companyCreditCheckJson = await responseCreditCheck.json();
                                                 console.log("companyCreditCheckJson: ", companyCreditCheckJson);
                                                 creditCheckStatus = companyCreditCheckJson.registrationStatus || "PENDING";
-                                                
+
                                                 if(creditCheckStatus === "IN_PROGRESS") {
                                                     var questionsURL = `https://eu.dif.rexel.com/web/api/v1/registrations/prospect/${companyCheckUUUID}/company/questions`;
                                                     try {
