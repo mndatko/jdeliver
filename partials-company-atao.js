@@ -2,13 +2,15 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function checkCompany(signUpHint) {
+//async function checkCompany(signUpHint) {
+function checkCompany(signUpHint) {
 
-    if(signUpHint === "ATAO") {
+    /*if(signUpHint === "ATAO") {
         const nextButton = document.getElementById('step1-nextButton-atao');
         const step1 = document.getElementById('step1-atao');
         const step2 = document.getElementById('step2');
         const errorP = document.getElementById('step1-error-atao');
+        var siret = document.getElementById('siretNumber');
         var companyCheckUUUID = null;
 
         const loaderOverlay = document.getElementById('loaderOverlay');
@@ -46,7 +48,7 @@ async function checkCompany(signUpHint) {
                 }               
             }
 
-            const siretNumber = document.getElementById('siretNumber').value;
+            const siretNumber = siret.value;
             if (siretNumber && regEmailAddress)
             {
                 try {
@@ -180,9 +182,9 @@ async function checkCompany(signUpHint) {
             }
 
         });
-    }
-    else {
-
+    }*/
+    //else {
+    if(true) {
         const nextButton = document.getElementById('nextButton');
         const step1 = document.getElementById('step1');
         const step2 = document.getElementById('step2');
