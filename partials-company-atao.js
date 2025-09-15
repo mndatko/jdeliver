@@ -126,7 +126,11 @@ async function checkCompany(signUpHint) {
                                                     } catch (errCreditCheck) {
                                                         errorP.textContent = 'An unexpected error occurred.';
                                                         errorP.style.display = 'block';
-                                                    } 
+                                                    }
+                                                    finally {
+                                                        hideLoader();
+                                                        nextButton.disabled = false;
+                                                    }  
 
                                                     step1.classList.add('visually-hidden');
                                                     step2.classList.remove('visually-hidden'); 
@@ -147,15 +151,19 @@ async function checkCompany(signUpHint) {
                                                     await sleep(1000);
                                                 }
                                             } else {
+                                                creditCheckStatus === "FAILED";
                                                 const errorCreditCheck = await responseCreditCheck.json();
                                                 errorP.textContent = errorCreditCheck.message || 'Validation failed.';
                                                 errorP.style.display = 'block';
-                                                creditCheckStatus === "FAILED";
                                             }
                                         }
                                     } catch (errCreditCheck) {
                                         errorP.textContent = 'An unexpected error occurred.';
                                         errorP.style.display = 'block';
+                                    } 
+                                    finally {
+                                        hideLoader();
+                                        nextButton.disabled = false;
                                     } 
                                 }
                                 else{
@@ -165,10 +173,10 @@ async function checkCompany(signUpHint) {
                                 await sleep(1000);
                             }
                         } else {
+                            companyCheckStatus === "FAILED";
                             const error = await response.json();
                             errorP.textContent = error.message || 'Validation failed.';
                             errorP.style.display = 'block';
-                            companyCheckStatus === "FAILED";
                         }
                     }
                 } catch (err) {
