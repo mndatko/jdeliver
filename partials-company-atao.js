@@ -150,6 +150,7 @@ async function checkCompany(signUpHint) {
                                                 const errorCreditCheck = await responseCreditCheck.json();
                                                 errorP.textContent = errorCreditCheck.message || 'Validation failed.';
                                                 errorP.style.display = 'block';
+                                                creditCheckStatus === "FAILED";
                                             }
                                         }
                                     } catch (errCreditCheck) {
@@ -167,6 +168,7 @@ async function checkCompany(signUpHint) {
                             const error = await response.json();
                             errorP.textContent = error.message || 'Validation failed.';
                             errorP.style.display = 'block';
+                            companyCheckStatus === "FAILED";
                         }
                     }
                 } catch (err) {
