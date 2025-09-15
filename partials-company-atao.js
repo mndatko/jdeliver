@@ -211,13 +211,13 @@ async function checkCompany(signUpHint) {
             if (accountNumber && accountPostalCode)
             {
                 try {
-                    /*const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/account/validate', {
+                    const response = await fetch('https://eu.dif.rexel.com/web/api/v1/registrations/account/validate', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'x-banner': 'frx' },
                         body: JSON.stringify({ accountNumberForExistingAccount: accountNumber, postalCodeForExistingAccount: accountPostalCode, "accountNumberForExistingAccountBot":null, "postalCodeForExistingAccountBot":null })
-                    });*/
+                    });
 
-                    const sampleCompanyJson = {
+                    /*const sampleCompanyJson = {
                         "companyName": "Bâtiment SAS",
                         "billingAddress": {
                             "address1": "123 Rue de la République",
@@ -230,7 +230,7 @@ async function checkCompany(signUpHint) {
                     const response = {
                         ok: true, 
                         json: async () => sampleCompanyJson
-                    };
+                    };*/
 
                     if (response.ok) {
                         
