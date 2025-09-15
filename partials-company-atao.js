@@ -151,7 +151,7 @@ async function checkCompany(signUpHint) {
                                                     await sleep(1000);
                                                 }
                                             } else {
-                                                creditCheckStatus === "FAILED";
+                                                creditCheckStatus = "FAILED";
                                                 const errorCreditCheck = await responseCreditCheck.json();
                                                 errorP.textContent = errorCreditCheck.message || 'Validation failed.';
                                                 errorP.style.display = 'block';
@@ -173,7 +173,7 @@ async function checkCompany(signUpHint) {
                                 await sleep(1000);
                             }
                         } else {
-                            companyCheckStatus === "FAILED";
+                            companyCheckStatus = "FAILED";
                             const error = await response.json();
                             errorP.textContent = error.message || 'Validation failed.';
                             errorP.style.display = 'block';
