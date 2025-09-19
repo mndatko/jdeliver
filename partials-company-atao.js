@@ -148,7 +148,7 @@ async function checkCompany(signUpHint) {
                                                     }
                                                 }
                                                 else {
-                                                    await sleep(1000);
+                                                    await sleep(100);
                                                 }
                                             } else {
                                                 creditCheckStatus = "FAILED";
@@ -170,7 +170,7 @@ async function checkCompany(signUpHint) {
                                 }
                             }
                             else {
-                                await sleep(1000);
+                                await sleep(100);
                             }
                         } else {
                             companyCheckStatus = "FAILED";
@@ -216,21 +216,6 @@ async function checkCompany(signUpHint) {
                         headers: { 'Content-Type': 'application/json', 'x-banner': 'frx' },
                         body: JSON.stringify({ accountNumberForExistingAccount: accountNumber, postalCodeForExistingAccount: accountPostalCode, "accountNumberForExistingAccountBot":null, "postalCodeForExistingAccountBot":null })
                     });
-
-                    /*const sampleCompanyJson = {
-                        "companyName": "Bâtiment SAS",
-                        "billingAddress": {
-                            "address1": "123 Rue de la République",
-                            "postalCode": "75001",
-                            "city": "PARIS",
-                            "country": "FR"
-                        }
-                    };
-
-                    const response = {
-                        ok: true, 
-                        json: async () => sampleCompanyJson
-                    };*/
 
                     if (response.ok) {
                         
